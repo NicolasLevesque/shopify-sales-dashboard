@@ -55,6 +55,11 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
+    build:
+      context: .         # Path where Dockerfile + requirements.txt live
+      dockerfile: Dockerfile
+    image: my_airflow:latest
+    container_name: airflow-webserver
     command: webserver
     user: "${AIRFLOW_UID:-50000}:0"
     ports:
@@ -73,6 +78,11 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
+    build:
+      context: .         # Path where Dockerfile + requirements.txt live
+      dockerfile: Dockerfile
+    image: my_airflow:latest
+    container_name: airflow-scheduler
     command: scheduler
     user: "${AIRFLOW_UID:-50000}:0"
     healthcheck:
@@ -89,6 +99,11 @@ services:
 
   airflow-worker:
     <<: *airflow-common
+    build:
+      context: .         # Path where Dockerfile + requirements.txt live
+      dockerfile: Dockerfile
+    image: my_airflow:latest
+    container_name: airflow-worker
     command: celery worker
     user: "${AIRFLOW_UID:-50000}:0"
     healthcheck:
@@ -110,6 +125,11 @@ services:
 
   airflow-triggerer:
     <<: *airflow-common
+    build:
+      context: .         # Path where Dockerfile + requirements.txt live
+      dockerfile: Dockerfile
+    image: my_airflow:latest
+    container_name: airflow-triggerer
     command: triggerer
     user: "${AIRFLOW_UID:-50000}:0"
     healthcheck:
@@ -130,6 +150,11 @@ services:
 
   airflow-init:
     <<: *airflow-common
+    build:
+      context: .         # Path where Dockerfile + requirements.txt live
+      dockerfile: Dockerfile
+    image: my_airflow:latest
+    container_name: airflow-init
     entrypoint: /bin/bash
     command:
       - -c
