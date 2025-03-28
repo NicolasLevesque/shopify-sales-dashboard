@@ -76,11 +76,3 @@ Enhances user experience and real-world application, allowing custom data explor
    - Highlight unusual revenue spikes/drops or suspicious data in daily trends.
 3. **Explanatory Notes**
    - Provide short documentation explaining how data is generated and how errors are injected.
-
-These additions would deepen the dashboard’s analytical power and clarity.
-
----
-
-## Conclusion
-
-Implementing these features will yield a **comprehensive** Streamlit dashboard, covering essential Shopify metrics, data quality checks, and optional advanced insights. This not only showcases your pipeline’s **ETL capability** but also provides a real-world analytics experience for stakeholders or potential employers to explore.
