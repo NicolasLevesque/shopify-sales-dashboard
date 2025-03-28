@@ -298,6 +298,27 @@ This automation clearly highlights the project’s scalability and real-world ap
 
 ---
 
+## 🩺 Data Quality & Failure Simulation
+
+In real-world data pipelines, unexpected issues can arise—such as incomplete rows, invalid dates, or negative quantities. To demonstrate robust data engineering practices, **this project introduces a small chance (~10%) of “bad data”** during daily synthetic order generation:
+
+- **Examples of Induced Errors**:
+  - **Missing or Negative Price** – Represents failed calculations or missing fields.
+  - **Future Order Date** – Simulates incorrect timestamps or time-zone quirks.
+  - **Negative Quantity** – Mimics data entry errors or faulty external integrations.
+
+Each problematic row is marked with a boolean flag, `is_error = TRUE`, so you can easily **isolate** and **remediate** them—mirroring real-world data quality workflows (e.g., quarantining bad records, applying correction scripts, or sending alerts). The pipeline **still runs** seamlessly, showcasing how to handle data anomalies gracefully without halting the entire ETL process.
+
+**Key Takeaways**:
+
+- 💡 **Simulated “failures”** reveal how you might track and fix flawed input.
+- ⚙️ **No disruption** to the main pipeline—only flagged rows need cleanup if desired.
+- 🔧 **Future Enhancements** can involve an automated “data fix” step or emailing a data quality report.
+
+Check out the `shopify_sales` table (or CSV) to see these _error rows_, each labeled with `is_error`. For details on how these errors are generated, see `generate_shopify_data.py`.
+
+---
+
 ## 🎯 **Why Choose This Dashboard over Shopify's Built-In Analytics?**
 
 While Shopify's built-in analytics provides basic metrics, this dashboard delivers advanced, actionable insights designed specifically to grow your business:

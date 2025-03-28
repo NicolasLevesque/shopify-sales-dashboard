@@ -1,28 +1,23 @@
--- customers table
-CREATE TABLE customers (
-    shopify_customer_id BIGINT PRIMARY KEY,
-    email VARCHAR(255),
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+CREATE TABLE IF NOT EXISTS shopify_sales (
+    order_id INT PRIMARY KEY,
+    order_date DATE,
+    customer_name VARCHAR(255),
+    customer_email VARCHAR(255),
+    product VARCHAR(255),
+    quantity INT,
+    price NUMERIC(10,2),
+    total NUMERIC(10,2)
 );
-
--- orders table
-CREATE TABLE orders (
-    shopify_order_id BIGINT PRIMARY KEY,
-    customer_id BIGINT REFERENCES customers(shopify_customer_id),
-    total_price DECIMAL(10,2),
-    currency VARCHAR(10),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
+CREATE TABLE IF NOT EXISTS daily_summary (
+    summary_date DATE PRIMARY KEY,
+    total_orders INT,
+    total_quantity INT,
+    total_revenue NUMERIC(10,2)
 );
-
--- products table
-CREATE TABLE products (
-    shopify_product_id BIGINT PRIMARY KEY,
-    title VARCHAR(255),
-    price DECIMAL(10,2),
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP
-);
+ALTER TABLE shopify_sales
+  ADD COLUMN shipping_method VARCHAR(50),
+  ADD COLUMN discount_code VARCHAR(50),
+  ADD COLUMN taxes NUMERIC(10,2),
+  ADD COLUMN shipping_cost NUMERIC(10,2),
+  ADD COLUMN discount_amount NUMERIC(10,2);
+  ADD COLUMN is_error BOOLEAN DEFAULT FALSE;
