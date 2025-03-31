@@ -12,10 +12,14 @@
 - [Tech Stack](#️-tech-stack)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
+- [Toggle Between Real and Synthetic Data]
 - [Running the Project](#️-running-the-project)
+- [Running the Streamlit Dashboard](#-running-the-streamlit-dashboard)
 - [Airflow Automation](#️-airflow-automation)
 - [Data Sources & ETL Pipeline](#-data-sources--etl-pipeline)
 - [Daily Data Generation](#-daily-data-generation-simulated-shopify-data)
+- [Data Quality and Failure Simulation](#-data-quality--failure-simulation)
+- [Automated Future Date Error Correction DAG](#️-automated-future-date-error-correction-dag)
 - [Why Choose This Dashboard over Shopify's Built-In Analytics?](#-why-choose-this-dashboard-over-shopifys-built-in-analytics)
 - [Note on Analytical Insights & Human Behavior](#-note-on-analytical-insights--human-behavior)
 - [Visualizations](#-visualizations)
@@ -149,6 +153,33 @@ POSTGRES_PORT=5432
 ```
 
 > For Docker, you may need to use `POSTGRES_HOST=postgres` or `host.docker.internal`.
+
+---
+
+## Toggle Between Real and Synthetic Data
+
+This project supports both real Shopify data and synthetic data for development and testing purposes. You can switch between these data sources by modifying the `USE_REAL_SHOPIFY_DATA` environment variable in your `.env` file.
+
+### Using Real Shopify Data:
+
+- Set `USE_REAL_SHOPIFY_DATA=True` in your `.env` file.
+- Ensure your Shopify API credentials are correctly configured in the `.env` file.
+- Rebuild and restart your Docker containers to apply the changes:
+
+```
+docker-compose down
+docker-compose up --build -d
+```
+
+### Using Synthetic Data:
+
+- Set `USE_REAL_SHOPIFY_DATA=False` in your `.env` file.
+- Rebuild and restart your Docker containers to apply the changes:
+
+```
+docker-compose down
+docker-compose up --build -d
+```
 
 ---
 
@@ -401,7 +432,7 @@ While Shopify's built-in analytics provides basic metrics, this dashboard delive
 
 This dashboard uses synthetic data generated daily for the purpose of demonstrating technical automation, analytics pipelines, and visualization capabilities.
 
-## While effective for showcasing technical processes, synthetic data does not inherently reflect authentic human psychological patterns, motivations, or behaviors. Genuine psychological insights and strategic recommendations require validation and analysis of authentic customer data.
+### While effective for showcasing technical processes, synthetic data does not inherently reflect authentic human psychological patterns, motivations, or behaviors. Genuine psychological insights and strategic recommendations require validation and analysis of authentic customer data.
 
 ## 📈 Visualizations
 
