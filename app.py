@@ -34,6 +34,8 @@ def load_data():
 
 
 def main():
+    st.cache_data.clear()
+
     # Set page configuration for better layout
     st.set_page_config(page_title="Shopify Sales Dashboard", layout="wide")
     st.title("📈 Shopify Sales Dashboard")
@@ -97,12 +99,11 @@ def main():
 
     # Visualization for daily revenue trends (Interactive Line Chart)
     st.subheader("📅 Daily Revenue")
-    filtered_df["order_date"] = pd.to_datetime(filtered_df["order_date"]).dt.date
+    filtered_df["order_date"] = pd.to_datetime(filtered_df["order_date"]).dt.floor("D")
     daily_revenue = filtered_df.groupby("order_date", as_index=False)[
         "total_price"
     ].sum()
-    # Explicitly convert order_date to string format YYY-MM--DD
-    daily_revenue["order_date"] = daily_revenue["order_date"].astype(str)
+    daily_revenue["order_date"] = daily_revenue["order_date"].dt.strftime("%Y-%m-%d")
 
     fig_daily = px.line(
         daily_revenue,
@@ -112,6 +113,7 @@ def main():
         labels={"order_date": "Order Date", "total_price": "Revenue ($)"},
         title="Daily Revenue Over Time",
     )
+    fig_daily.update_xaxes(type="category")  # explicitly fixes date display issue
     fig_daily.update_layout(xaxis_title="Order Date", yaxis_title="Revenue ($)")
     st.plotly_chart(fig_daily, use_container_width=True)
 

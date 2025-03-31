@@ -63,6 +63,8 @@ services:
       -c "streamlit run /opt/airflow/streamlit_app/app.py --server.address=0.0.0.0"
     env_file:
       - .env
+    volumes:
+      - ./:/opt/airflow/streamlit_app
   redis:
     image: redis:7.2-bookworm
     expose:
