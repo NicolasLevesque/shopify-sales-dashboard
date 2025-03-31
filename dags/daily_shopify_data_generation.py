@@ -44,7 +44,7 @@ def generate_and_save_orders():
       - product (VARCHAR)
       - quantity (INT)
       - price (NUMERIC)
-      - total (NUMERIC)
+      - total_price (NUMERIC)
       - shipping_method (VARCHAR)
       - discount_code (VARCHAR)
       - taxes (NUMERIC)
@@ -111,7 +111,7 @@ def generate_and_save_orders():
                 subtotal = 0
                 discount_amount = 0
                 taxes = 0
-                total = 0
+                total_price = 0
 
             elif error_type == "future_date":
                 order_date = fake.date_between(start_date="+1d", end_date="+30d")
@@ -121,7 +121,7 @@ def generate_and_save_orders():
                 subtotal = 0
                 discount_amount = 0
                 taxes = 0
-                total = 0
+                total_price = 0
 
         orders_data.append(
             (
@@ -132,7 +132,7 @@ def generate_and_save_orders():
                 product,
                 quantity,
                 price,
-                total,
+                total_price,
                 shipping_method,
                 chosen_discount,
                 taxes,
