@@ -3,3 +3,6 @@ requests
 python-dotenv
 psycopg2-binary
 Faker
+streamlit
+plotly
+shopifyapi

@@ -76,3 +76,5 @@ Enhances user experience and real-world application, allowing custom data explor
    - Highlight unusual revenue spikes/drops or suspicious data in daily trends.
 3. **Explanatory Notes**
    - Provide short documentation explaining how data is generated and how errors are injected.
+
+---

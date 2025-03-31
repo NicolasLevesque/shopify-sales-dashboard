@@ -1,5 +1,9 @@
 # Shopify Sales Dashboard
 
+> 🚀 **Instant Plug-and-Play Shopify Dashboard**
+>
+> This analytics dashboard can be immediately connected to **any Shopify store**. Simply provide your Shopify credentials in the `.env` file, and your personalized sales dashboard will be ready in minutes.
+
 ## Quick Navigation
 
 - [Project Overview](#-project-overview)
@@ -182,6 +186,44 @@ Then, access the Airflow UI at [http://localhost:8080](http://localhost:8080), e
 
 ---
 
+## 🚀 Running the Streamlit Dashboard
+
+### Using Docker (Recommended)
+
+If you're running your project with Docker Compose, the Streamlit dashboard automatically starts alongside Airflow:
+
+- **Ensure your Docker containers are running**:
+
+```bash
+docker-compose up -d
+```
+
+- **Open your web browser and navigate to**:
+
+[http://localhost:8501](http://localhost:8501)
+
+This will display your interactive Streamlit dashboard connected directly to the PostgreSQL database, automatically reflecting new data from your Airflow pipeline.
+
+---
+
+### Without Docker (Manual Setup)
+
+If you're running locally (without Docker):
+
+- **Navigate to your dashboard directory** and run:
+
+```bash
+streamlit run app.py
+```
+
+- **Access the dashboard in your browser**:
+
+[http://localhost:8501](http://localhost:8501)
+
+Ensure your local environment is configured properly and your PostgreSQL instance is running.
+
+---
+
 ## ⚙️ Airflow Automation
 
 ### Airflow Setup
@@ -316,6 +358,21 @@ Each problematic row is marked with a boolean flag, `is_error = TRUE`, so you ca
 - 🔧 **Future Enhancements** can involve an automated “data fix” step or emailing a data quality report.
 
 Check out the `shopify_sales` table (or CSV) to see these _error rows_, each labeled with `is_error`. For details on how these errors are generated, see `generate_shopify_data.py`.
+
+---
+
+## 🛠️ Automated Future Date Error Correction DAG
+
+An additional Airflow DAG (`fix_daily_data_errors`) has been implemented to automatically correct a specific common error introduced during the simulated daily order generation:
+
+- **Future Order Dates Correction**  
+  Identifies orders mistakenly dated in the future and adjusts these dates back to the current date, ensuring accurate reporting and visualization in the dashboard.
+
+> **Note**: Other error types (negative prices and quantities) remain flagged (`is_error = TRUE`) and are visible in the dashboard, allowing manual review or further automation in future iterations.
+
+**Schedule**: Automatically triggered daily, immediately after the data generation DAG completes.
+
+**Usage**: Enable the DAG labeled `fix_daily_data_errors` in Airflow's UI and verify the corrections through your dashboard or Airflow task logs.
 
 ---
 

@@ -5,36 +5,37 @@ import psycopg2
 import pandas as pd
 import random
 from faker import Faker
+import os
+import sys
 
-# Fixed configurations for shipping costs, discount codes, and tax rates
-SHIPPING_METHODS = ["Standard", "Express", "Overnight"]
-SHIPPING_COSTS = {"Standard": 0.00, "Express": 10.00, "Overnight": 20.00}
-DISCOUNT_CODES = [
-    None,
-    "WELCOME10",
-    "SPRING15",
-    None,
-    None,
-]  # None appears more frequently
-DISCOUNT_MAP = {"WELCOME10": 0.10, "SPRING15": 0.15}  # 10%  # 15%
-TAX_RATES = [0.05, 0.08, 0.13]  # e.g. 5%, 8%, 13%
+sys.path.append("/opt/airflow/scripts")
 
-# Probability of injecting a data error
-ERROR_PROB = 0.1  # 10% chance
+
+# Import shared config
+from product_config import (
+    PRODUCTS_AND_PRICES,
+    SHIPPING_METHODS,
+    SHIPPING_COSTS,
+    DISCOUNT_CODES,
+    DISCOUNT_MAP,
+    TAX_RATES,
+    ERROR_PROB,
+    pick_product_and_price,
+)
 
 # PostgreSQL connection settings
-POSTGRES_HOST = "postgres"
-POSTGRES_DB = "airflow"
-POSTGRES_USER = "airflow"
-POSTGRES_PASSWORD = "airflow"
-POSTGRES_PORT = 5432
+DB_HOST = os.getenv("POSTGRES_HOST", "postgres")
+DB_NAME = os.getenv("POSTGRES_DB", "airflow")
+DB_USER = os.getenv("POSTGRES_USER", "airflow")
+DB_PASSWORD = os.getenv("POSTGRES_PASSWORD", "airflow")
+DB_PORT = int(os.getenv("POSTGRES_PORT", "5432"))
 
 fake = Faker()
 
 
 def generate_and_save_orders():
     """
-    Inserts random, realistic Shopify orders into the 'shopify_sales' table in Postgres.
+    Inserts random, realistic Shopify orders into the 'synthetic_orders' table in Postgres.
     Columns required:
       - order_id (INT, PK)
       - order_date (DATE)
@@ -52,16 +53,16 @@ def generate_and_save_orders():
       - is_error (BOOLEAN)
     """
     conn = psycopg2.connect(
-        host=POSTGRES_HOST,
-        database=POSTGRES_DB,
-        user=POSTGRES_USER,
-        password=POSTGRES_PASSWORD,
-        port=POSTGRES_PORT,
+        host=DB_HOST,
+        database=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        port=DB_PORT,
     )
     cursor = conn.cursor()
 
     # Get the current max order_id so we know where to pick up
-    cursor.execute("SELECT MAX(order_id) FROM shopify_sales;")
+    cursor.execute("SELECT MAX(order_id) FROM synthetic_orders;")
     result = cursor.fetchone()
     last_id = result[0] if result[0] is not None else 1000
 
@@ -74,10 +75,10 @@ def generate_and_save_orders():
         order_date = fake.date_between(start_date="-1d", end_date="today")
         customer_name = fake.name()
         customer_email = fake.email()
-        product = fake.word().capitalize()
 
+        # Pick a product + static price from product_config
+        product, price = pick_product_and_price()
         quantity = random.randint(1, 5)
-        price = round(random.uniform(10, 200), 2)
 
         # Shipping, discount, and tax
         shipping_method = random.choice(SHIPPING_METHODS)
@@ -92,7 +93,7 @@ def generate_and_save_orders():
         subtotal = quantity * price
         discount_amount = round(subtotal * discount_rate, 2)
         taxes = round((subtotal - discount_amount) * tax_rate, 2)
-        total = round(subtotal - discount_amount + taxes + shipping_cost, 2)
+        total_price = round(subtotal - discount_amount + taxes + shipping_cost, 2)
 
         # By default, no error
         is_error = False
@@ -141,11 +142,11 @@ def generate_and_save_orders():
             )
         )
 
-    # Insert new rows into shopify_sales
+    # Insert new rows into synthetic_orders
     insert_query = """
-        INSERT INTO shopify_sales (
+        INSERT INTO synthetic_orders (
             order_id, order_date, customer_name, customer_email,
-            product, quantity, price, total,
+            product, quantity, price, total_price,
             shipping_method, discount_code, taxes, shipping_cost, discount_amount,
             is_error
         ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -157,30 +158,30 @@ def generate_and_save_orders():
     conn.close()
 
     # Count how many error we introduced
-    errors_inserted = sum(1 for row in orders_data if row[-1] is True)
+    error_count = sum(1 for row in orders_data if row[-1] is True)
     print(
-        f"Inserted {new_orders_count} new orders into shopify_sales with more realistic fields."
+        f"Inserted {new_orders_count} new orders into synthetic_orders with more realistic fields."
     )
 
 
 def generate_daily_summary():
     conn = psycopg2.connect(
-        host="postgres",
-        database="airflow",
-        user="airflow",
-        password="airflow",
-        port=5432,
+        host=DB_HOST,
+        database=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        port=DB_PORT,
     )
     cursor = conn.cursor()
 
-    # Query daily totals from shopify_sales
+    # Query daily totals from synthetic_orders
     query = """
         SELECT
             order_date AS summary_date,
             COUNT(order_id) AS total_orders,
             SUM(quantity) AS total_quantity,
-            SUM(total) AS total_revenue
-        FROM shopify_sales
+            SUM(total_price) AS total_revenue
+        FROM synthetic_orders
         GROUP BY order_date
         ORDER BY order_date;
     """
