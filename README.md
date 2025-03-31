@@ -12,7 +12,7 @@
 - [Tech Stack](#️-tech-stack)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
-- [Toggle Between Real and Synthetic Data]
+- [Toggle Between Real and Synthetic Data](#toggle-between-real-and-synthetic-data)
 - [Running the Project](#️-running-the-project)
 - [Running the Streamlit Dashboard](#-running-the-streamlit-dashboard)
 - [Airflow Automation](#️-airflow-automation)
