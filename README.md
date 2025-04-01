@@ -30,18 +30,15 @@
 
 ---
 
-## 🚀 Project Overview
+## 🧭 Project Overview
 
-The **Shopify Sales Dashboard** is an automated analytics solution designed specifically for Shopify store owners and analytics enthusiasts. It features a **publicly accessible, continuously updated historical dataset** of realistically generated Shopify sales data. New simulated orders are automatically created and appended daily, enabling an ever-growing dataset ideal for data exploration, visualization, analysis, and machine learning practice.
+The **Shopify Sales Dashboard** is a portfolio-ready analytics dashboard specifically designed for Shopify merchants and analytics professionals. It demonstrates end-to-end capabilities in data extraction, transformation, loading (ETL), and visualization, to answer practical business questions:
 
-This open dataset (`shopify_sales.csv`) offers immediate, practical opportunities for:
+- **Sales Performance:** Quickly track total revenue, average order values (AOV), and top-performing products.
+- **Customer Insights:** Analyze order patterns, repeat purchase rates, and customer segments.
+- **Trends and Patterns:** Clearly visualize daily and monthly sales trends, enabling actionable business decisions around conversion and customer retention.
 
-- 📈 **Sales trend analysis and forecasting**
-- 👥 **Customer segmentation and behavioral insights**
-- 📊 **Interactive exploratory data analysis**
-- ⚙️ **Demonstration of automated data analytics pipelines**
-
-Built around clear automation, scalability, and ease of use, this solution ensures minimal manual intervention and maximum reliability, providing actionable insights through dynamic, interactive dashboards powered by Power BI, Tableau, or Streamlit.
+Built using **Python, Streamlit, PostgreSQL, and Airflow**, this project highlights modern data analytics skills, professional dashboard development, and practical business-oriented thinking.
 
 ---
 
