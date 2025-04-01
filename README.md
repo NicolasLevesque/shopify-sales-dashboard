@@ -44,38 +44,76 @@ Built using **Python, Streamlit, PostgreSQL, and Airflow**, this project highlig
 
 ## ⚡ Quick Start (Instant Usage)
 
-**Step 1: Get the Data**
+Follow these steps to set up and launch the **Shopify Sales Dashboard** quickly:
 
-```bash
+### 📋 Requirements
+
+- Python 3.8 or higher
+- PostgreSQL
+- Docker (optional, recommended)
+
+### 🔧 Setup Instructions
+
+**1. Clone the Repository:**
+
+```
 git clone https://github.com/NicolasLevesque/shopify-sales-dashboard.git
 cd shopify-sales-dashboard
 ```
 
-**Step 2: Install Dependencies**
+**2. Set Up Python Environment:**
 
-```bash
-pip install pandas matplotlib
+Create a virtual environment (recommended):
+
+```
+python -m venv venv
+source venv/bin/activate # Linux/macOS
+.\venv\Scripts\activate # Windows
 ```
 
-**Step 3: Instantly Run Analyses**
+Install required packages:
 
-- **Visualize Sales Trends:**
-
-```bash
-python quick_visualization.py
+```
+pip install -r requirements.txt
 ```
 
-- **Explore Data Interactively:**
+**3. Configure Environment Variables:**
 
-```bash
-python explore_data.py
+Rename the `.env.example` file to `.env`:
+
+```
+cp .env.example .env
 ```
 
-- **Forecast Future Sales (Demo):**
+Configure the `.env` file:
 
-```bash
-python predict_sales.py
+- To use synthetic data (recommended for initial exploration), set:
+  ```
+  USE_REAL_SHOPIFY_DATA=false
+  ```
+- To use real Shopify data, provide Shopify API credentials:
+  ```
+  USE_REAL_SHOPIFY_DATA=true
+  SHOPIFY_API_KEY="your_api_key"
+  SHOPIFY_PASSWORD="your_api_password"
+  SHOPIFY_STORE_NAME="your_store_name"
+  ```
+
+### ▶️ Running the Dashboard
+
+Make sure your data pipeline (Airflow DAG or synthetic data script) has run and populated the database.
+
+Start the Streamlit app:
+
 ```
+streamlit run app.py
+```
+
+Access the dashboard by opening your browser and navigating to `http://localhost:8501`.
+
+### 🔄 Switching Data Sources
+
+You can easily switch between synthetic and real Shopify data by modifying the `USE_REAL_SHOPIFY_DATA` variable in your `.env` file and restarting the dashboard.
 
 ---
 
