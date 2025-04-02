@@ -359,16 +359,16 @@ default_args = {
 The project uses Shopify as its primary data source, leveraging the Shopify REST API to access sales, customer, and product data in real-time.
 
 **ETL Pipeline:**  
-The ETL process is managed by `scripts/etl.py`, which extracts data from Shopify, transforms and cleans it using Python and Pandas, and loads it into PostgreSQL.
+The ETL process is managed by `scripts/real_shopify_etl.py`, which extracts data from Shopify, transforms and cleans it using Python and Pandas, and loads it into PostgreSQL.
 
 - **Manual Execution:** Run locally with:
 
 ```bash
-python scripts/etl.py
+python scripts/real_shopify_etl.py
 ```
 
 - **Airflow Automation:**  
-  The Airflow DAG (`daily_shopify_etl.py`) automates the ETL pipeline daily at midnight (`@daily`). The DAG runs the ETL script, monitors its success, and sends email notifications upon failure.
+  The Airflow DAG (`daily_real_shopify_etl.py`) automates the ETL pipeline daily at midnight (`@daily`). The DAG runs the ETL script, monitors its success, and sends email notifications upon failure.
 
 You can trigger or monitor the DAG via the Airflow web interface:
 
