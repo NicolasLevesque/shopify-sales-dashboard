@@ -31,7 +31,7 @@ DISCOUNT_MAP = {"WELCOME10": 0.10, "SPRING15": 0.15}  # 10% off  # 15% off
 TAX_RATES = [0.05, 0.08, 0.13]
 
 # Probability of forcing a data error
-ERROR_PROB = 0.1
+ERROR_PROB = 0.03
 
 
 def pick_product_and_price():

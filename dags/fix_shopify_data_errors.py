@@ -29,7 +29,7 @@ def fix_future_date_errors():
         """
         UPDATE synthetic_orders
         SET order_date = CURRENT_DATE, is_error = FALSE
-        WHERE order_date > CURRENT_DATE AND is_error = TRUE
+        WHERE order_date > CURRENT_DATE
     """
     )
 
