@@ -7,6 +7,7 @@
 ## Quick Navigation
 
 - [Project Overview](#-project-overview)
+- [Key Metrics & Business Questions Answered](#-key-metrics--business-questions-answered)
 - [Quick Start](#-quick-start-instant-usage)
 - [Features](#-features)
 - [Tech Stack](#️-tech-stack)
@@ -39,6 +40,43 @@ The **Shopify Sales Dashboard** is a portfolio-ready analytics dashboard specifi
 - **Trends and Patterns:** Clearly visualize daily and monthly sales trends, enabling actionable business decisions around conversion and customer retention.
 
 Built using **Python, Streamlit, PostgreSQL, and Airflow**, this project highlights modern data analytics skills, professional dashboard development, and practical business-oriented thinking.
+
+---
+
+## 🎯 Key Metrics & Business Questions Answered
+
+This dashboard tracks essential e-commerce metrics and answers key business questions:
+
+**Key Metrics:**
+
+- 📈 **Total Sales Revenue**
+- 🛒 **Average Order Value (AOV)**
+- 📊 **Total Number of Orders**
+- 💎 **Customer Lifetime Value (CLV)**
+- 🔄 **Returning vs. New Customers**
+- 🏅 **Top-selling Products**
+- 🚀 **Sales Growth Rate (weekly/monthly)**
+
+**Business Questions Answered:**
+
+1. **Sales Performance:**
+
+   - How are total sales trending over time?
+   - What's the average order value (AOV), and is it improving?
+
+2. **Customer Insights:**
+
+   - Who are the most valuable customers (high CLV)?
+   - What's the ratio of returning to new customers?
+
+3. **Product Insights:**
+
+   - Which products contribute most to revenue?
+   - Are there clear seasonal trends or unexpected surges?
+
+4. **Operational Effectiveness:**
+   - Are discounts effectively driving sales?
+   - Which shipping methods are customers preferring?
 
 ---
 
