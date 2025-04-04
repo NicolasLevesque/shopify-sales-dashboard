@@ -60,6 +60,11 @@ def generate_and_save_orders():
         port=DB_PORT,
     )
     cursor = conn.cursor()
+    # Fetch existing customers
+    cursor.execute(
+        "SELECT DISTINCT customer_name, customer_email FROM synthetic_orders;"
+    )
+    existing_customers = cursor.fetchall()
 
     # Get the current max order_id so we know where to pick up
     cursor.execute("SELECT MAX(order_id) FROM synthetic_orders;")
@@ -73,8 +78,13 @@ def generate_and_save_orders():
     for i in range(new_orders_count):
         order_id = last_id + i + 1
         order_date = fake.date_between(start_date="-1d", end_date="today")
-        customer_name = fake.name()
-        customer_email = fake.email()
+
+        # 20% chance to reuse existing customer
+        if existing_customers and random.random() < 0.2:
+            customer_name, customer_email = random.choice(existing_customers)
+        else:
+            customer_name = fake.name()
+            customer_email = fake.email()
 
         # Pick a product + static price from product_config
         product, price = pick_product_and_price()

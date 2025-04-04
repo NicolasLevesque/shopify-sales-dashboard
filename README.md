@@ -78,6 +78,9 @@ This dashboard tracks essential e-commerce metrics and answers key business ques
    - Are discounts effectively driving sales?
    - Which shipping methods are customers preferring?
 
+**Note:**  
+Due to synthetic data constraints, some visualizations may initially appear less realistic. When connected to real Shopify data, the dashboard accurately and clearly addresses all questions outlined above.
+
 ---
 
 ## ⚡ Quick Start (Instant Usage)
