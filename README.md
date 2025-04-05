@@ -4,6 +4,12 @@
 >
 > This analytics dashboard can be immediately connected to **any Shopify store**. Simply provide your Shopify credentials in the `.env` file, and your personalized sales dashboard will be ready in minutes.
 
+---
+
+## 📊 [View the Complete Shopify Dashboard](docs/shopify_dashboard.pdf)
+
+---
+
 ## Quick Navigation
 
 - [Project Overview](#-project-overview)
