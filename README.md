@@ -10,6 +10,14 @@
 
 ---
 
+## Quick Visual Preview
+
+![Daily Revenue Trends](images/daily_revenue_trends.png)
+
+![Discounts Impact on Sales](images/discounts_impact_sales.png)
+
+---
+
 ## Quick Navigation
 
 - [Project Overview](#-project-overview)
