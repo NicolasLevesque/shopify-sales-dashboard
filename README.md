@@ -45,6 +45,7 @@
 
 - [Shopify → HubSpot Integration (Standard)](#-shopify--hubspot-integration-standard)
 - [PostgreSQL → HubSpot API Integration (Custom ETL)](#-postgresql--hubspot-api-integration-custom-etl)
+- [HubSpot-Shopify Integration Steps](docs/hubspot_shopify_integration_steps.md)
 
 ### ⚙️ Technical Insights
 
