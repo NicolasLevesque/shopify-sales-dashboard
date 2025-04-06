@@ -37,11 +37,14 @@
 - [Automated Future Date Error Correction DAG](#️-automated-future-date-error-correction-dag)
 - [Why Choose This Dashboard over Shopify's Built-In Analytics?](#-why-choose-this-dashboard-over-shopifys-built-in-analytics)
 - [Note on Analytical Insights & Human Behavior](#-note-on-analytical-insights--human-behavior)
-- [Visualizations](#-visualizations)
+- [Dashboard Screenshots](#️-dashboard-screenshots)
 - [Shopify API Reference](#-shopify-api-reference)
 - [Troubleshooting](#️-troubleshooting)
 - [Future Enhancements](#-future-enhancements)
+- [Next Steps & Roadmap](#-next-steps--roadmap)
 - [Recent Updates](#-recent-updates)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
@@ -172,15 +175,14 @@ You can easily switch between synthetic and real Shopify data by modifying the `
 
 ---
 
-## 📌 Features
+## 📈 Features & Business Insights
 
-- **Automated Data Extraction:** Real-time Shopify data extraction via Shopify API.
-- **Robust ETL Pipeline:** Automated data cleaning & transformation with Python, Pandas, and SQL.
-- **Flexible Data Storage:** Supports PostgreSQL and Google BigQuery databases.
-- **Scheduled Automation:** ETL processes automated daily using Apache Airflow.
-- **Interactive Visualizations:** Dashboards created in Power BI, Tableau, or Streamlit.
-- **Email Notifications:** Alerts on ETL pipeline failures via SMTP.
-- **Secure Configuration:** Environment variables (no hardcoded credentials).
+The Shopify Sales Dashboard provides actionable analytics tailored explicitly to e-commerce business questions:
+
+- **Conversion Rate Insights**: Clearly visualize and analyze product performance to identify top-converting products and categories.
+- **Customer Retention Analysis**: Track and display the ratio of new versus returning customers, identifying key retention trends and high-CLV customers.
+- **Revenue Trends & Seasonality**: Offer clear insights into sales trends, seasonal variations, and the impact of discounts on sales.
+- **Operational Efficiency**: Visualize preferred shipping methods and the effectiveness of promotional strategies.
 
 ---
 
@@ -541,11 +543,23 @@ This dashboard uses synthetic data generated daily for the purpose of demonstrat
 
 ### While effective for showcasing technical processes, synthetic data does not inherently reflect authentic human psychological patterns, motivations, or behaviors. Genuine psychological insights and strategic recommendations require validation and analysis of authentic customer data.
 
-## 📈 Visualizations
+---
 
-The Shopify Sales Dashboard supports visualization through Power BI, Tableau, or Streamlit, allowing you to explore interactive dashboards for deeper business insights.
+## 🖥️ Dashboard Screenshots
 
-> **Dashboards coming soon!** _(Dashboard links will be added here when available.)_
+Below are screenshots clearly showcasing the Shopify Sales Dashboard features:
+
+**Sales & Revenue Trends:**
+![Revenue Trends](images/daily_revenue_trends.png)
+_Clearly illustrates monthly and seasonal revenue patterns, emphasizing product performance._
+
+**Customer Insights:**
+![Customer Insights](images/customer_insights.png)
+_Detailed view of customer segmentation, highlighting new vs returning customer ratios._
+
+**Operational Insights:**
+![Operational Insights](images/operational_insights.png)
+_Dashboard visual showing the effectiveness of discounts and shipping method preferences._
 
 ---
 
@@ -628,6 +642,32 @@ https://{SHOP_NAME}.myshopify.com/admin/api/2023-10/
 
 ---
 
+## 🚀 Next Steps & Roadmap
+
+To clearly guide the next phases of the project, here are the immediate next steps planned:
+
+- **Power BI Integration**
+
+  - Develop and integrate automated pipelines into Power BI for enriched visualizations and interactive analytics.
+  - Clearly document the integration process and provide setup instructions.
+
+- **CRM Integration**
+
+  - Research and decide between HubSpot and Salesforce for customer relationship management integration.
+  - Automate synchronization of customer data with your dashboards.
+
+- **End-to-End Testing**
+
+  - Perform comprehensive testing of the entire analytics pipeline to ensure data integrity and functionality.
+  - Document testing procedures clearly for reproducibility.
+
+- **Quick Demo & Showcase**
+
+  - Record a concise video demo clearly showcasing dashboard features and business insights.
+  - Publish the demo publicly for better visibility and outreach.
+
+  ***
+
 ## 🚀 Recent Updates
 
 - ✅ **Implemented automated error correction DAG** (future dates, negative quantities, missing prices)
@@ -636,3 +676,35 @@ https://{SHOP_NAME}.myshopify.com/admin/api/2023-10/
 - ✅ **Improved README clarity and accuracy** reflecting the project's current state
 
 ---
+
+## 🤝 Contributing
+
+Contributions are welcome and encouraged! To contribute clearly and effectively, please follow these guidelines:
+
+1. **Fork** the repository and create your feature branch:
+
+```bash
+git checkout -b feature/YourFeatureName
+```
+
+2. **Commit** your changes with clear and descriptive commit messages:
+
+```bash
+git commit -m 'Add clear description of YourFeature'
+```
+
+3. **Push** your changes to your forked feature branch:
+
+```bash
+git push origin feature/YourFeatureName
+```
+
+4. Submit a **Pull Request** clearly describing the purpose and impact of your changes.
+
+Thank you for helping improve the project!
+
+---
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
