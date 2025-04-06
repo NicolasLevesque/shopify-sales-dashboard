@@ -25,7 +25,7 @@
 
 ---
 
-## 📌 Quick Navigation
+## Quick Navigation
 
 ### ⚡ Getting Started
 
@@ -40,6 +40,11 @@
 - [Power BI Integration](#-power-bi-integration)
 - [Dashboard Screenshots](#️-dashboard-screenshots)
 - [Toggle Between Real and Synthetic Data](#toggle-between-real-and-synthetic-data)
+
+### 🚦 Integration Strategy
+
+- [Shopify → HubSpot Integration (Standard)](#-shopify--hubspot-integration-standard)
+- [PostgreSQL → HubSpot API Integration (Custom ETL)](#-postgresql--hubspot-api-integration-custom-etl)
 
 ### ⚙️ Technical Insights
 
@@ -255,6 +260,28 @@ docker-compose up --build -d
 
 ---
 
+## 🚦 Integration Strategy
+
+This project explicitly implements two distinct CRM integrations:
+
+### ✅ Shopify → HubSpot Integration (Standard)
+
+**Purpose:** Fast, user-friendly CRM synchronization.
+
+- **Advantages:** Simple setup, minimal coding, robust built-in analytics.
+- **Disadvantages:** Limited customization options.
+
+### ✅ PostgreSQL → HubSpot API Integration (Custom ETL)
+
+**Purpose:** Advanced control, customizable analytics pipeline.
+
+- **Advantages:** Full customization, precise data transformation control.
+- **Disadvantages:** Technical overhead, requires ongoing maintenance.
+
+Implementing both methods clearly demonstrates versatile skill in practical business analytics and technical data engineering.
+
+---
+
 ## ▶️ Running the Project
 
 ### Run ETL Manually
@@ -415,7 +442,7 @@ You can trigger or monitor the DAG via the Airflow web interface:
 
 ## 📊 Power BI Integration
 
-This project clearly integrates PostgreSQL data directly into Power BI for interactive visualization and analysis:
+This project integrates PostgreSQL data directly into Power BI for interactive visualization and analysis:
 
 - **Data Connection**:  
   Established via Power BI's native PostgreSQL connector (hosted locally or via Docker).
