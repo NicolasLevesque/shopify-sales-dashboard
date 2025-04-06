@@ -18,33 +18,41 @@
 
 ---
 
-## Quick Navigation
+## 📌 Quick Navigation
 
-- [Project Overview](#-project-overview)
-- [Key Metrics & Business Questions Answered](#-key-metrics--business-questions-answered)
-- [Quick Start](#-quick-start-instant-usage)
-- [Features](#-features)
-- [Tech Stack](#️-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Toggle Between Real and Synthetic Data](#toggle-between-real-and-synthetic-data)
+### ⚡ Getting Started
+
+- [Quick Start](#-quick-start)
+- [Airflow Automation](#️-airflow-automation)
 - [Running the Project](#️-running-the-project)
 - [Running the Streamlit Dashboard](#-running-the-streamlit-dashboard)
-- [Airflow Automation](#️-airflow-automation)
+
+### 📊 Data & Dashboards
+
 - [Data Sources & ETL Pipeline](#-data-sources--etl-pipeline)
-- [Daily Data Generation](#-daily-data-generation-simulated-shopify-data)
-- [Data Quality and Failure Simulation](#-data-quality--failure-simulation)
-- [Automated Future Date Error Correction DAG](#️-automated-future-date-error-correction-dag)
-- [Why Choose This Dashboard over Shopify's Built-In Analytics?](#-why-choose-this-dashboard-over-shopifys-built-in-analytics)
-- [Note on Analytical Insights & Human Behavior](#-note-on-analytical-insights--human-behavior)
 - [Dashboard Screenshots](#️-dashboard-screenshots)
-- [Shopify API Reference](#-shopify-api-reference)
-- [Troubleshooting](#️-troubleshooting)
-- [Future Enhancements](#-future-enhancements)
+- [Toggle Between Real and Synthetic Data](#toggle-between-real-and-synthetic-data)
+
+### ⚙️ Technical Insights
+
+- [Daily Data Generation (Simulated Shopify Data)](#-daily-data-generation-simulated-shopify-data)
+- [Data Quality & Failure Simulation](#-data-quality--failure-simulation)
+- [Automated Error Correction DAG](#️-automated-data-error-detection--correction-dag)
+
+### 🛠️ Development & Contribution
+
 - [Next Steps & Roadmap](#-next-steps--roadmap)
+- [Future Enhancements](#-future-enhancements)
 - [Recent Updates](#-recent-updates)
 - [Contributing](#-contributing)
 - [License](#-license)
+
+### 📖 Additional Information
+
+- [Why Choose This Dashboard?](#-why-choose-this-dashboard-over-shopifys-built-in-analytics)
+- [Analytical Insights & Human Behavior](#-note-on-analytical-insights--human-behavior)
+- [Shopify API Reference](#-shopify-api-reference)
+- [Troubleshooting](#️-troubleshooting)
 
 ---
 
@@ -100,78 +108,82 @@ Due to synthetic data constraints, some visualizations may initially appear less
 
 ---
 
-## ⚡ Quick Start (Instant Usage)
+## ⚡ Quick Start
 
-Follow these steps to set up and launch the **Shopify Sales Dashboard** quickly:
+Follow these simple steps to quickly set up and launch your **Shopify Sales Dashboard**:
 
 ### 📋 Requirements
 
 - Python 3.8 or higher
 - PostgreSQL
-- Docker (optional, recommended)
+- Docker (recommended, but optional)
 
 ### 🔧 Setup Instructions
 
-**1. Clone the Repository:**
+**1. Clone the Repository**
 
-```
+```bash
 git clone https://github.com/NicolasLevesque/shopify-sales-dashboard.git
 cd shopify-sales-dashboard
 ```
 
-**2. Set Up Python Environment:**
+**2. Set Up Python Environment**
 
-Create a virtual environment (recommended):
+Create and activate a virtual environment:
 
-```
+```bash
 python -m venv venv
-source venv/bin/activate # Linux/macOS
-.\venv\Scripts\activate # Windows
-```
-
-Install required packages:
-
-```
+source venv/bin/activate  # Linux/macOS
+.\venv\Scripts\activate   # Windows
 pip install -r requirements.txt
 ```
 
-**3. Configure Environment Variables:**
+**3. Configure Environment Variables**
 
-Rename the `.env.example` file to `.env`:
+Copy the example x.envx file and configure your credentials:
 
-```
+```bash
 cp .env.example .env
 ```
 
-Configure the `.env` file:
-
-- To use synthetic data (recommended for initial exploration), set:
-  ```
-  USE_REAL_SHOPIFY_DATA=false
-  ```
-- To use real Shopify data, provide Shopify API credentials:
-  ```
-  USE_REAL_SHOPIFY_DATA=true
-  SHOPIFY_API_KEY="your_api_key"
-  SHOPIFY_PASSWORD="your_api_password"
-  SHOPIFY_STORE_NAME="your_store_name"
-  ```
-
-### ▶️ Running the Dashboard
-
-Make sure your data pipeline (Airflow DAG or synthetic data script) has run and populated the database.
-
-Start the Streamlit app:
+Update your `.env` file as follows:
 
 ```
+# PostgreSQL Credentials
+POSTGRES_DB=shopify_data
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=your-db-password
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+
+# Shopify API Credentials (optional: synthetic data enabled by default)
+USE_REAL_SHOPIFY_DATA=false
+SHOPIFY_API_KEY=your_api_key
+SHOPIFY_PASSWORD=your_api_password
+SHOPIFY_STORE_NAME=your_store_name
+```
+
+**4. Launch the Project with Docker (Recommended)**
+
+```bash
+docker-compose up -d
+```
+
+(Optional) If you want to manually run ETL scripts outside of Airflow:
+
+```bash
+python scripts/real_shopify_etl.py
+```
+
+**5. Run the Streamlit Dashboard**
+
+```bash
 streamlit run app.py
 ```
 
-Access the dashboard by opening your browser and navigating to `http://localhost:8501`.
+Access your dashboard at [http://localhost:8501](http://localhost:8501).
 
-### 🔄 Switching Data Sources
-
-You can easily switch between synthetic and real Shopify data by modifying the `USE_REAL_SHOPIFY_DATA` variable in your `.env` file and restarting the dashboard.
+Follow these steps to set up and launch the **Shopify Sales Dashboard** quickly:
 
 ---
 
@@ -205,46 +217,6 @@ The Shopify Sales Dashboard provides actionable analytics tailored explicitly to
 - **data/**: Optional storage for raw or intermediate data files.
 - **logs/**: Airflow-generated logs (not committed to GitHub).
 - **config/**: Contains configuration-related files (e.g., Airflow settings).
-
----
-
-## 🚧 Getting Started
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/NicolasLevesque/shopify-sales-dashboard.git
-cd shopify-sales-dashboard
-```
-
-### Install Dependencies
-
-Ensure you're using Python 3.8 or later, then run:
-
-```bash
-pip install -r requirements.txt
-```
-
-> If using Docker, dependencies will be installed automatically by your Docker container.
-
-### Set Up Environment Variables
-
-Copy the `.env.example` file to `.env` in your project root, then update it with your credentials:
-
-```bash
-# Shopify Credentials
-SHOP_NAME=your-shop-name
-ADMIN_ACCESS_TOKEN=your-shopify-access-token
-
-# PostgreSQL Credentials
-POSTGRES_DB=shopify_data
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your-db-password
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-```
-
-> For Docker, you may need to use `POSTGRES_HOST=postgres` or `host.docker.internal`.
 
 ---
 
