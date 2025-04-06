@@ -37,6 +37,7 @@
 ### 📊 Data & Dashboards
 
 - [Data Sources & ETL Pipeline](#-data-sources--etl-pipeline)
+- [Power BI Integration](#-power-bi-integration)
 - [Dashboard Screenshots](#️-dashboard-screenshots)
 - [Toggle Between Real and Synthetic Data](#toggle-between-real-and-synthetic-data)
 
@@ -409,6 +410,21 @@ python scripts/real_shopify_etl.py
 You can trigger or monitor the DAG via the Airflow web interface:
 
 - URL: [http://localhost:8080](http://localhost:8080)
+
+---
+
+## 📊 Power BI Integration
+
+This project clearly integrates PostgreSQL data directly into Power BI for interactive visualization and analysis:
+
+- **Data Connection**:  
+  Established via Power BI's native PostgreSQL connector (hosted locally or via Docker).
+
+- **Data Validation**:  
+  Data accuracy and consistency validated by cross-checking PostgreSQL query outputs against visualizations in Power BI.
+
+- **Interactive Dashboard**:  
+  [📊 View Full Power BI Dashboard](docs/shopify_dashboard.pdf), clearly showcasing daily revenue, customer insights, product trends, and operational effectiveness.
 
 ---
 
