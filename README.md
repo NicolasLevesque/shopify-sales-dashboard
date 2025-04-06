@@ -1,5 +1,12 @@
 # Shopify Sales Dashboard
 
+---
+
+![License](https://img.shields.io/github/license/NicolasLevesque/shopify-sales-dashboard)
+![Last Commit](https://img.shields.io/github/last-commit/NicolasLevesque/shopify-sales-dashboard)
+
+---
+
 > 🚀 **Instant Plug-and-Play Shopify Dashboard**
 >
 > This analytics dashboard can be immediately connected to **any Shopify store**. Simply provide your Shopify credentials in the `.env` file, and your personalized sales dashboard will be ready in minutes.
