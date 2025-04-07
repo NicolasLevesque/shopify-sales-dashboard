@@ -7,3 +7,5 @@ streamlit
 plotly
 shopifyapi
 hubspot-api-client
+matplotlib
+prophet
