@@ -4,5 +4,6 @@ SELECT DISTINCT
     product AS product_name,
     sku,
     price,
-    category
+    category,
+    NOW() AS updated_at  -- adds a current timestamp if no existing updated_at
 FROM synthetic_orders;

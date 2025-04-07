@@ -6,5 +6,7 @@ SELECT DISTINCT
     customer_email AS email,
     phone,
     address,
-    created_at
-FROM synthetic_orders;
+    created_at,
+    updated_at
+FROM synthetic_orders
+WHERE customer_email IS NOT NULL;  -- Exclude records without email to match HubSpot's mandatory email field

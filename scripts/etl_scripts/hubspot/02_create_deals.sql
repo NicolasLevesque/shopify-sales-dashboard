@@ -5,5 +5,6 @@ SELECT
     order_date AS deal_create_date,
     total_price AS amount,
     order_status AS deal_stage,
-    payment_method
+    payment_method,
+    NOW() AS updated_at  -- Add current timestamp if not already available
 FROM synthetic_orders;
