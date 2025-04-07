@@ -6,3 +6,4 @@ Faker
 streamlit
 plotly
 shopifyapi
+hubspot-api-client
