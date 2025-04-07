@@ -49,13 +49,19 @@ for first_name, last_name, email, phone, address in contacts:
         ]
     )
 
+    address_parts = [part.strip() for part in address.split(",")]
+
     contact_data = ContactInput(
         properties={
             "email": email,
             "firstname": first_name,
             "lastname": last_name,
             "phone": phone,
-            "address": address,
+            "address": address_parts[0] if len(address_parts) > 0 else "",
+            "city": address_parts[1] if len(address_parts) > 1 else "",
+            "state": address_parts[2] if len(address_parts) > 2 else "",
+            "zip": address_parts[-1].split(" ")[-1] if len(address_parts) >= 4 else "",
+            "country": "Canada",
         }
     )
 
