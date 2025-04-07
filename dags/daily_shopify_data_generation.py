@@ -80,7 +80,7 @@ def generate_and_save_orders():
         order_date = fake.date_between(start_date="-1d", end_date="today")
 
         # 20% chance to reuse existing customer
-        if existing_customers and random.random() < 0.2:
+        if existing_customers and random.random() < 0.25:
             customer_name, customer_email = random.choice(existing_customers)
         else:
             customer_name = fake.name()
