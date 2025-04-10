@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from datetime import datetime, timedelta
 import psycopg2
 import pandas as pd
@@ -252,5 +253,10 @@ with DAG(
         task_id="generate_daily_summary", python_callable=generate_daily_summary
     )
 
+    update_customer_type = SQLExecuteQueryOperator(
+        task_id="update_customer_type",
+        conn_id="postgres_default",  # ensure this matches your Airflow connection
+        sql="sql_scripts/update_customer_type_synthetic.sql",
+    )
     # Ensure summary runs after the orders are generated
-    task_generate_orders >> task_daily_summary
+    task_generate_orders >> task_daily_summary >> update_customer_type

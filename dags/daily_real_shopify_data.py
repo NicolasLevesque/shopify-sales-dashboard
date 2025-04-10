@@ -1,6 +1,8 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from datetime import datetime
+
 
 with DAG(
     dag_id="daily_real_shopify_data",
@@ -14,4 +16,9 @@ with DAG(
         bash_command="python /opt/airflow/scripts/real_shopify_etl.py",
     )
 
-    fetch_real_data
+    update_customer_type = SQLExecuteQueryOperator(
+        task_id="update_customer_type",
+        conn_id="postgres_default",  # ensure this matches your Airflow connection
+        sql="sql_scripts/update_customer_type.sql",
+    )
+    fetch_real_data >> update_customer_type

@@ -9,14 +9,14 @@ WITH cte AS (
             PARTITION BY customer_email 
             ORDER BY order_date
         ) AS rn
-    FROM real_orders
+    FROM synthetic_orders
 )
 
--- 2) Update each row in real_orders by joining to the CTE.
+-- 2) Update each row in synthetic_orders by joining to the CTE.
 --    If the row_number (rn) is 1, that means it's the first (earliest) order for that email → "New".
 --    Otherwise, it's "Returning".
-UPDATE real_orders r
-SET customer_status = CASE
+UPDATE synthetic_orders r
+SET customer_type = CASE
     WHEN c.rn = 1 THEN 'New'
     ELSE 'Returning'
 END

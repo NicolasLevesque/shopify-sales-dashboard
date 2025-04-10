@@ -53,5 +53,5 @@ ALTER TABLE real_orders ALTER COLUMN total_discounts TYPE NUMERIC(10,2) USING to
 ALTER TABLE real_orders ALTER COLUMN total_shipping TYPE NUMERIC(10,2) USING total_shipping::NUMERIC(10,2);
 
 ALTER TABLE real_orders 
-ADD COLUMN customer_status VARCHAR(50);
+ADD COLUMN customer_type VARCHAR(50);
 
