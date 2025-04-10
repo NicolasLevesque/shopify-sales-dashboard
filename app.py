@@ -140,6 +140,38 @@ def main():
     )
     st.plotly_chart(fig_products, use_container_width=True)
 
+    # Visualization for ratio of new to returning customers (Interactive Pie Chart)
+    st.subheader("🔄 Ratio of Returning to New Customers")
+    customer_counts = filtered_df["customer_type"].value_counts().reset_index()
+    customer_counts.columns = ["customer_type", "count"]
+
+    colors = {"New": "#EFFBF8", "Returning": "#8BFDE6"}
+
+    fig_customer_ratio = px.pie(
+        customer_counts,
+        values="count",
+        names="customer_type",
+        title="",
+        color="customer_type",
+        color_discrete_map=colors,
+        hole=0,
+    )
+
+    fig_customer_ratio.update_layout(
+        showlegend=False,  # removes the legend
+        uniformtext_minsize=12,  # ensures text remains readable
+        uniformtext_mode="hide",  # hides text if it's too small
+        margin=dict(t=50, b=50, l=25, r=25),  # adjust margins to enlarge chart
+    )
+
+    fig_customer_ratio.update_traces(
+        textinfo="percent+label",
+        textfont_size=18,
+        insidetextorientation="horizontal",
+        textposition="auto",
+    )
+    st.plotly_chart(fig_customer_ratio, use_container_width=True)
+
     # Collapsible section for viewing error rows
     if "is_error" in filtered_df.columns and error_rows > 0:
         with st.expander(f"View Error Rows ({int(error_rows)})"):

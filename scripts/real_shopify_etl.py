@@ -73,8 +73,18 @@ def load_orders_to_postgres(orders_data):
     )
 
     df = pd.DataFrame(orders_data)
-    df.to_sql("real_orders", engine, if_exists="replace", index=False)
-    print("✅ Real Shopify orders loaded into PostgreSQL successfully.")
+
+    existing_orders = pd.read_sql(
+        "SELECT DISTINCT order_id, product FROM real_orders", engine
+    )
+
+    df_new = df.merge(
+        existing_orders, on=["order_id", "product"], how="left", indicator=True
+    )
+    df_new = df_new[df_new["_merge"] == "left_only"].drop("_merge", axis=1)
+
+    df_new.to_sql("real_orders", engine, if_exists="append", index=False)
+    print(f"✅ {len(df_new)} new records added successfully.")
 
 
 if __name__ == "__main__":
