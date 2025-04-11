@@ -100,7 +100,7 @@ services:
     container_name: airflow-webserver
     command: webserver
     ports:
-      - "8080:8080"
+      - "8500:8080"
 
   airflow-scheduler:
     <<: *airflow-common

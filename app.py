@@ -132,11 +132,13 @@ def main():
         y="total_price",
         color="product",
         labels={"product": "Product", "total_price": "Revenue ($)"},
-        title="Top Products by Revenue",
         text_auto=".2s",
     )
     fig_products.update_layout(
-        showlegend=False, xaxis_title="Product", yaxis_title="Revenue ($)"
+        showlegend=False,
+        xaxis_title=None,
+        yaxis_title="Revenue ($)",
+        title={"text": "", "x": 0.5, "xanchor": "center"},
     )
     st.plotly_chart(fig_products, use_container_width=True)
 
@@ -171,6 +173,156 @@ def main():
         textposition="auto",
     )
     st.plotly_chart(fig_customer_ratio, use_container_width=True)
+
+    # Most Valuable Customers (High CLV)
+    st.subheader("💎 Most Valuable Customers (High CLV)")
+    top_customers = (
+        filtered_df.groupby(
+            ["customer_first_name", "customer_last_name"], as_index=False
+        )["total_price"]
+        .sum()
+        .assign(
+            customer_full_name=lambda df: df["customer_first_name"]
+            + " "
+            + df["customer_last_name"]
+        )
+        .sort_values("total_price", ascending=False)
+        .head(25)
+    )
+
+    fig_customers = px.bar(
+        top_customers[::-1],  # reverse order for horizontal bar
+        x="total_price",
+        y="customer_full_name",
+        orientation="h",
+        labels={
+            "customer_full_name": "Customer Name",
+            "total_price": "Total Revenue ($)",
+        },
+        color="total_price",  # Color based on revenue
+        color_continuous_scale=["#26EAFC", "#1C5CD7"],  # Gradient from low to high
+        title=None,
+        text_auto=".2s",
+        height=600,
+    )
+
+    fig_customers.update_layout(
+        coloraxis_showscale=False,
+        yaxis=dict(title=None, tickfont=dict(size=14)),  # Adjust the size as needed
+        xaxis=dict(
+            title=dict(text="Total Revenue ($)", font=dict(size=14)),
+            tickfont=dict(size=14),
+        ),
+        showlegend=False,
+    )
+
+    st.plotly_chart(fig_customers, use_container_width=True)
+
+    # Weekly Revenue Trends by Product Over Time
+    st.subheader("📅 Weekly Revenue Trends by Product Over Time")
+    # Convert order_date to weekly periods (simplified format)
+    filtered_df["Week"] = (
+        filtered_df["order_date"]
+        .dt.to_period("W")
+        .apply(lambda r: r.start_time.strftime("%Y-%m-%d"))
+    )
+
+    weekly_product_revenue = filtered_df.groupby(["Week", "product"], as_index=False)[
+        "total_price"
+    ].sum()
+
+    products = weekly_product_revenue["product"].unique()
+    color_map = px.colors.qualitative.Alphabet  # or any other Plotly palette
+    color_discrete_map = {
+        product: color_map[i % len(color_map)] for i, product in enumerate(products)
+    }
+
+    # Plot line chart
+    fig_revenue_trends = px.line(
+        weekly_product_revenue,
+        x="Week",
+        y="total_price",
+        color="product",
+        markers=True,
+        labels={
+            "Date": "Date",
+            "total_price": "Total Revenue ($)",
+            "product": "Product",
+        },
+        title="Weekly Revenue Trends by Product Over Time",
+        color_discrete_map=color_discrete_map,
+    )
+
+    fig_revenue_trends.update_layout(
+        yaxis=dict(title="Total Revenue ($)"),
+        xaxis=dict(title=None),
+        legend_title="Product",
+    )
+
+    st.plotly_chart(fig_revenue_trends, use_container_width=True)
+
+    # Do Higher Discounts Lead to Higher Sales?
+    st.subheader("🏷️ Do Higher Discounts Lead to Higher Sales?")
+    # Aggregate data by product
+    product_discounts = filtered_df.groupby("product", as_index=False).agg(
+        total_sales=("total_price", "sum"), discount_amount=("discount_amount", "sum")
+    )
+
+    # Scatter plot with gradient color and trend line
+    fig_discounts = px.scatter(
+        filtered_df.groupby("product", as_index=False).agg(
+            {"discount_amount": "sum", "total_price": "sum"}
+        ),
+        x="discount_amount",
+        y="total_price",
+        color="discount_amount",
+        color_continuous_scale=["#48CAE4", "#023E8A"],
+        trendline="ols",
+        trendline_color_override="#7A5195",
+        labels={
+            "discount_amount": "Discount Amount ($)",
+            "total_price": "Total Sales ($)",
+        },
+        hover_name="product",
+        title="Do Higher Discounts Lead to Higher Sales?",
+        text="product",  # This adds labels to each dot
+    )
+
+    # Adjust layout to avoid label overlap and improve visibility
+    fig_discounts.update_traces(
+        textposition="top center", textfont_size=12, marker=dict(size=15)
+    )
+
+    st.plotly_chart(fig_discounts, use_container_width=True)
+
+    # Customer Preferences: Shipping Method (Pie Chart)
+    st.subheader("🚚 Customer Preferences: Shipping Method")
+
+    shipping_method_counts = filtered_df["shipping_method"].value_counts().reset_index()
+    shipping_method_counts.columns = ["shipping_method", "count"]
+
+    fig_shipping = px.pie(
+        shipping_method_counts,
+        names="shipping_method",
+        values="count",
+        title="",
+        color_discrete_sequence=px.colors.qualitative.Pastel,  # Adjust palette if desired
+        hole=0,  # Optional donut-style, adjust or remove if preferred
+    )
+
+    fig_shipping.update_traces(
+        textinfo="percent+label",
+        textfont_size=14,
+        insidetextorientation="horizontal",
+        textposition="outside",
+    )
+
+    fig_shipping.update_layout(
+        showlegend=False,
+        margin=dict(t=50, b=50, l=25, r=25),
+    )
+
+    st.plotly_chart(fig_shipping, use_container_width=True)
 
     # Collapsible section for viewing error rows
     if "is_error" in filtered_df.columns and error_rows > 0:

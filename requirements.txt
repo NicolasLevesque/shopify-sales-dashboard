@@ -10,3 +10,4 @@ hubspot-api-client
 matplotlib
 prophet
 apache-airflow-providers-postgres
+statsmodels

@@ -258,5 +258,16 @@ with DAG(
         conn_id="postgres_default",  # ensure this matches your Airflow connection
         sql="sql_scripts/update_customer_type_synthetic.sql",
     )
+
+    update_customer_names = SQLExecuteQueryOperator(
+        task_id="update_customer_names",
+        conn_id="postgres_default",
+        sql="sql_scripts/update_customer_names.sql",
+    )
     # Ensure summary runs after the orders are generated
-    task_generate_orders >> task_daily_summary >> update_customer_type
+    (
+        task_generate_orders
+        >> task_daily_summary
+        >> update_customer_type
+        >> update_customer_names
+    )

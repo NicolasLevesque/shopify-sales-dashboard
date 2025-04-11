@@ -55,3 +55,7 @@ ALTER TABLE real_orders ALTER COLUMN total_shipping TYPE NUMERIC(10,2) USING tot
 ALTER TABLE real_orders 
 ADD COLUMN customer_type VARCHAR(50);
 
+ALTER TABLE synthetic_orders
+ADD COLUMN customer_first_name TEXT,
+ADD COLUMN customer_last_name TEXT;
+
