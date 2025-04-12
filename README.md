@@ -55,7 +55,6 @@
 
 ### 🛠️ Development & Contribution
 
-- [Next Steps & Roadmap](#-next-steps--roadmap)
 - [Future Enhancements](#-future-enhancements)
 - [Recent Updates](#-recent-updates)
 - [Contributing](#-contributing)
@@ -197,8 +196,6 @@ streamlit run app.py
 
 Access your dashboard at [http://localhost:8501](http://localhost:8501).
 
-Follow these steps to set up and launch the **Shopify Sales Dashboard** quickly:
-
 ---
 
 ## 📈 Features & Business Insights
@@ -234,7 +231,7 @@ The Shopify Sales Dashboard provides actionable analytics tailored explicitly to
 
 ---
 
-## Toggle Between Real and Synthetic Data
+## 📈 Toggle Between Real and Synthetic Data
 
 This project supports both real Shopify data and synthetic data for development and testing purposes. You can switch between these data sources by modifying the `USE_REAL_SHOPIFY_DATA` environment variable in your `.env` file.
 
@@ -279,8 +276,6 @@ This project explicitly implements two distinct CRM integrations:
 - **Advantages:** Full customization, precise data transformation control.
 - **Disadvantages:** Technical overhead, requires ongoing maintenance.
 
-Implementing both methods clearly demonstrates versatile skill in practical business analytics and technical data engineering.
-
 ---
 
 ## ▶️ Running the Project
@@ -313,11 +308,11 @@ Launch your Docker environment and Airflow scheduler:
 docker-compose up -d
 ```
 
-Then, access the Airflow UI at [http://localhost:8080](http://localhost:8080), enable your DAG (`daily_shopify_etl`), and trigger it manually or let it run on schedule.
+Then, access the Airflow UI at [http://localhost:8500](http://localhost:8500), enable your DAG (`daily_real_shopify_data`), and trigger it manually or let it run on schedule.
 
 ---
 
-## 🚀 Running the Streamlit Dashboard
+## 📊 Running the Streamlit Dashboard
 
 ### Using Docker (Recommended)
 
@@ -380,12 +375,12 @@ Ensure your local environment is configured properly and your PostgreSQL instanc
    ```
 
 4. **Access Airflow Web Interface:**
-   - Visit [http://localhost:8080](http://localhost:8080) and enable your DAG (`daily_shopify_etl`).
+   - Visit [http://localhost:8500](http://localhost:8500) and enable your DAG (`daily_real_shopify_data`).
 
 ### Scheduling
 
 - **Default schedule:** Runs daily at midnight (`@daily`).
-- **Customize schedule:** Edit the `schedule_interval` parameter in your DAG file (`daily_shopify_etl.py`).
+- **Customize schedule:** Edit the `schedule_interval` parameter in your DAG file (`daily_real_shopify_data.py`).
 
 Example (run every 6 hours):
 
@@ -433,11 +428,11 @@ python scripts/real_shopify_etl.py
 ```
 
 - **Airflow Automation:**  
-  The Airflow DAG (`daily_real_shopify_etl.py`) automates the ETL pipeline daily at midnight (`@daily`). The DAG runs the ETL script, monitors its success, and sends email notifications upon failure.
+  The Airflow DAG (`daily_real_shopify_data.py`) automates the ETL pipeline daily at midnight (`@daily`). The DAG runs the ETL script, monitors its success, and sends email notifications upon failure.
 
 You can trigger or monitor the DAG via the Airflow web interface:
 
-- URL: [http://localhost:8080](http://localhost:8080)
+- URL: [http://localhost:8500](http://localhost:8500)
 
 ---
 
@@ -501,6 +496,8 @@ Below is a realistic sample of the synthetic Shopify orders data, (including gen
 | 1037     | 2025-04-02 | Jeffrey Marquez    | garzajavier@example.org     | Yoga Mat            | 2        | 30.00 | 84.80       | Overnight       | NULL          | 4.80  | 20.00         | 0.00            | False    |
 | 1041     | 2025-04-02 | Jacqueline Johnson | gobrien@example.com         | Desk Organizer      | 2        | 22.00 | 66.20       | Overnight       | NULL          | 2.20  | 20.00         | 0.00            | False    |
 
+- ✅ `updated_at` timestamps are now automatically set via Airflow after each daily data generation run.
+
 ---
 
 ## 🩺 Data Quality & Failure Simulation
@@ -537,26 +534,22 @@ Each correction is clearly logged in Airflow task logs for easy monitoring and v
 
 ---
 
-## 🚀 Why Choose This Dashboard over Shopify's Built-In Analytics?
+## Why Choose This Dashboard over Shopify's Built-In Analytics?
 
-While Shopify's built-in analytics provides basic metrics, this dashboard aims to deliver advanced, actionable insights designed specifically to grow your business. Future planned enhancements include:
+This dashboard provides clear advantages over Shopify's built-in analytics:
 
-- **🎯 Advanced Customer Segmentation (RFM Analysis):**  
-  Quickly identify your most valuable customers and target them effectively.
+- **Customizable Dashboard** tailored specifically to your unique Shopify store analytics needs.
+- **Complete Data Ownership**—Store your data locally, export freely, and integrate with external CRM or reporting tools.
+- **Automated Daily ETL Workflows**—Reliable daily updates using Apache Airflow without manual intervention.
+- **Affordable, One-Time Cost**—No ongoing subscription or monthly fees.
+- **Synthetic Data Generation & Error Correction**—Clearly demonstrated ETL pipeline robustness and automation capabilities.
 
-- **⚠️ Automated Anomaly Detection & Alerts:**  
-  Receive automatic notifications when unexpected trends or data irregularities are detected.
+**Upcoming Features (Currently in Development):**
 
-- **📈 Predictive Analytics & Forecasting:**  
-  Leverage forecasting models to anticipate sales trends and inventory requirements.
-
-- **🖥️ Interactive & Customizable Dashboards:**  
-  Tailor-made, drill-down visualizations built in Power BI, Tableau, or Streamlit.
-
-- **🔄 Completely Hands-Free Automation:**  
-  Fully automated workflows—from data ingestion to dashboard updates—without manual intervention.
-
-_Note:_ These features are in active development. Updates will be clearly communicated as features are implemented.
+- 🎯 Advanced Customer Segmentation (RFM Analysis)
+- ⚠️ Automated Anomaly Detection & Alerts
+- 📈 Predictive Analytics & Forecasting
+- 🔄 Enhanced CRM Integrations and More
 
 ---
 
@@ -645,7 +638,7 @@ https://{SHOP_NAME}.myshopify.com/admin/api/2023-10/
 
 **3. DAG Not Visible in Airflow**
 
-- Ensure the DAG file (`daily_real_shopify_etl.py`) is in your `dags/` folder.
+- Ensure the DAG file (`daily_real_shopify_data.py`) is in your `dags/` folder.
 - Restart your Airflow containers (`docker-compose restart`).
 
 **4. Email Alerts Not Sending**
@@ -665,38 +658,13 @@ https://{SHOP_NAME}.myshopify.com/admin/api/2023-10/
 
 ---
 
-## 🚀 Next Steps & Roadmap
-
-To clearly guide the next phases of the project, here are the immediate next steps planned:
-
-- **Power BI Integration**
-
-  - Develop and integrate automated pipelines into Power BI for enriched visualizations and interactive analytics.
-  - Clearly document the integration process and provide setup instructions.
-
-- **CRM Integration**
-
-  - Research and decide between HubSpot and Salesforce for customer relationship management integration.
-  - Automate synchronization of customer data with your dashboards.
-
-- **End-to-End Testing**
-
-  - Perform comprehensive testing of the entire analytics pipeline to ensure data integrity and functionality.
-  - Document testing procedures clearly for reproducibility.
-
-- **Quick Demo & Showcase**
-
-  - Record a concise video demo clearly showcasing dashboard features and business insights.
-  - Publish the demo publicly for better visibility and outreach.
-
-  ***
-
-## 🚀 Recent Updates
+## Recent Updates
 
 - ✅ **Implemented automated error correction DAG** (future dates, negative quantities, missing prices)
 - ✅ **Switched from CSV storage to PostgreSQL** for improved scalability and data integrity
 - ✅ **Enhanced data generation realism** (simulated errors, accurate product/customer behavior)
 - ✅ **Improved README clarity and accuracy** reflecting the project's current state
+- ✅ **Verified and updated the `updated_at` column logic for synthetic_orders**, ensuring clear timestamps updates via Airflow DAG.
 
 ---
 
