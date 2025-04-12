@@ -730,4 +730,4 @@ Thank you for helping improve the project!
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.MD` for more information.

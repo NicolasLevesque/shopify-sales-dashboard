@@ -264,10 +264,20 @@ with DAG(
         conn_id="postgres_default",
         sql="sql_scripts/update_customer_names.sql",
     )
+
+    update_synthetic_orders_timestamp = SQLExecuteQueryOperator(
+        task_id="update_synthetic_orders_timestamp",
+        conn_id="postgres_default",
+        sql="""
+            UPDATE synthetic_orders
+            SET updated_at = NOW();
+        """,
+    )
     # Ensure summary runs after the orders are generated
     (
         task_generate_orders
         >> task_daily_summary
         >> update_customer_type
         >> update_customer_names
+        >> update_synthetic_orders_timestamp
     )

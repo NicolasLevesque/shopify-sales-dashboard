@@ -21,4 +21,13 @@ with DAG(
         conn_id="postgres_default",  # ensure this matches your Airflow connection
         sql="sql_scripts/update_customer_type.sql",
     )
-    fetch_real_data >> update_customer_type
+
+    update_real_orders_timestamp = SQLExecuteQueryOperator(
+        task_id="update_real_orders_timestamp",
+        conn_id="postgres_default",
+        sql="""
+            UPDATE real_orders
+            SET updated_at = NOW();
+        """,
+    )
+    fetch_real_data >> update_customer_type >> update_real_orders_timestamp
