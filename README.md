@@ -30,6 +30,8 @@
 ### ⚡ Getting Started
 
 - [Quick Start](#-quick-start)
+- [Features & Business Insights](#-features--business-insights)
+- [Predictive Analytics & Sales Forecasting](#-predictive-analytics--sales-forecasting)
 - [Airflow Automation](#️-airflow-automation)
 - [Running the Project](#️-running-the-project)
 - [Running the Streamlit Dashboard](#-running-the-streamlit-dashboard)
@@ -206,6 +208,24 @@ The Shopify Sales Dashboard provides actionable analytics tailored explicitly to
 - **Customer Retention Analysis**: Track and display the ratio of new versus returning customers, identifying key retention trends and high-CLV customers.
 - **Revenue Trends & Seasonality**: Offer clear insights into sales trends, seasonal variations, and the impact of discounts on sales.
 - **Operational Efficiency**: Visualize preferred shipping methods and the effectiveness of promotional strategies.
+
+---
+
+## 📈 Predictive Analytics & Sales Forecasting
+
+This project currently implements a straightforward Prophet forecasting model to predict Shopify store sales:
+
+- Forecasts future sales clearly based on historical revenue.
+- Generates daily revenue predictions for the next 14 days.
+- Provides basic visual forecasting plots.
+- Sales forecasts use Prophet's logistic growth model to clearly prevent unrealistic exponential trends, producing more reliable and believable predictions.
+
+**Upcoming enhancements clearly planned:**
+
+- Model validation and accuracy measurement.
+- Integration of holidays and special events.
+- Advanced parameter tuning for improved accuracy.
+- Interactive forecast visualizations.
 
 ---
 

@@ -11,3 +11,4 @@ matplotlib
 prophet
 apache-airflow-providers-postgres
 statsmodels
+scikit-learn

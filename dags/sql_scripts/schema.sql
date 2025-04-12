@@ -59,3 +59,5 @@ ALTER TABLE synthetic_orders
 ADD COLUMN customer_first_name TEXT,
 ADD COLUMN customer_last_name TEXT;
 
+ALTER TABLE synthetic_orders
+ADD COLUMN updated_at TIMESTAMP DEFAULT NOW();
