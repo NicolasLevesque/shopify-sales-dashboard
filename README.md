@@ -7,7 +7,7 @@
 
 ---
 
-> 🚀 **Instant Plug-and-Play Shopify Dashboard**
+> **Instant Plug-and-Play Shopify Dashboard**
 >
 > This analytics dashboard can be immediately connected to **any Shopify store**. Simply provide your Shopify credentials in the `.env` file, and your personalized sales dashboard will be ready in minutes.
 
@@ -22,6 +22,8 @@
 ![Daily Revenue Trends](images/daily_revenue_trends.png)
 
 ![Discounts Impact on Sales](images/discounts_impact_sales.png)
+
+![Sales Forecast](images/sales_forecast_plot.png)
 
 ---
 
