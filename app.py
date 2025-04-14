@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 from dotenv import load_dotenv
 import os
+from scripts.predictive_analytics.sales_forecast import generate_forecast_plot
 
 # Load environment variables
 load_dotenv()
@@ -323,6 +324,10 @@ def main():
     )
 
     st.plotly_chart(fig_shipping, use_container_width=True)
+
+    st.subheader("14-Day Sales Forecast")
+    forecast_plot = generate_forecast_plot()
+    st.pyplot(forecast_plot)
 
     # Collapsible section for viewing error rows
     if "is_error" in filtered_df.columns and error_rows > 0:
