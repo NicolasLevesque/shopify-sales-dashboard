@@ -1,0 +1,11 @@
+pandas
+prophet
+SQLAlchemy
+python-dotenv
+matplotlib
+shopifyapi
+streamlit
+psycopg2-binary
+plotly
+apache-airflow
+apache-airflow-providers-common-sql
