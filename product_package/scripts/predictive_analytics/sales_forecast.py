@@ -25,7 +25,7 @@ def generate_forecast_plot():
     query = """
     SELECT order_date::date as ds, 
            SUM(total_price::numeric) as y
-    FROM synthetic_orders
+    FROM real_orders
     GROUP BY ds
     ORDER BY ds;
     """

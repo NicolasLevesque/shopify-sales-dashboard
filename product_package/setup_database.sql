@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS real_orders (
-    order_id BIGINT PRIMARY KEY,
+    order_id BIGINT NOT NULL,
     order_date TIMESTAMP NOT NULL,
-    product VARCHAR(255),
+    product VARCHAR(255) NOT NULL,
     customer_first_name VARCHAR(255),
     customer_last_name VARCHAR(255),
     customer_email VARCHAR(255),
@@ -16,5 +16,7 @@ CREATE TABLE IF NOT EXISTS real_orders (
     gateway VARCHAR(100),
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
-    customer_type VARCHAR(50) CHECK (customer_type IN ('new', 'returning'))
+    customer_type VARCHAR(50) CHECK (customer_type IN ('New', 'Returning')),
+    shipping_method VARCHAR(255),
+    PRIMARY KEY (order_id, product)
 );

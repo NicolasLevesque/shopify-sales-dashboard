@@ -264,24 +264,20 @@ def main():
 
     # Do Higher Discounts Lead to Higher Sales?
     st.subheader("🏷️ Do Higher Discounts Lead to Higher Sales?")
-    # Aggregate data by product
-    product_discounts = filtered_df.groupby("product", as_index=False).agg(
-        total_sales=("total_price", "sum"), discount_amount=("discount_amount", "sum")
-    )
 
     # Scatter plot with gradient color and trend line
     fig_discounts = px.scatter(
         filtered_df.groupby("product", as_index=False).agg(
-            {"discount_amount": "sum", "total_price": "sum"}
+            {"total_discounts": "sum", "total_price": "sum"}
         ),
-        x="discount_amount",
+        x="total_discounts",
         y="total_price",
-        color="discount_amount",
+        color="total_discounts",
         color_continuous_scale=["#48CAE4", "#023E8A"],
         trendline="ols",
         trendline_color_override="#7A5195",
         labels={
-            "discount_amount": "Discount Amount ($)",
+            "total_discounts": "Discount Amount ($)",
             "total_price": "Total Sales ($)",
         },
         hover_name="product",

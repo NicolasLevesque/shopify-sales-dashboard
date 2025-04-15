@@ -9,12 +9,12 @@ Easily analyze and forecast your Shopify store's performance.
 
 - **`app.py`** – Streamlit dashboard
 - **`scripts/predictive_analytics/sales_forecast.py`** – Prophet forecasting script
-- **`scripts/fetch_shopify_data.py`** – Shopify data e`traction script
+- **`scripts/fetch_shopify_data.py`** – Shopify data extraction script
 - **`dags/shopify_etl_dag.py`** – Airflow ETL pipeline
 - **`Dockerfile`** – Docker setup
 - **`docker-compose.yml`** – Docker Compose setup
 - **`.env.example`** – Template environment file
-- **`requirements.t`t`** – Python dependencies
+- **`requirements.txt`** – Python dependencies
 - **`setup_database.sql`** – Database schema setup script
 - **`setup_database.bat`** – Quick-start database setup script
 
@@ -44,6 +44,7 @@ Your services are now running:
 
 - Airflow Dashboard: `http://localhost:8500`
 - Streamlit Dashboard: `http://localhost:8501`
+-
 
 ### ✅ Step 4: Set Up Database Schema
 
@@ -61,7 +62,7 @@ This sets up the database schema automatically.
 - Trigger the DAG:
 
 ```
-daily_real_shopify_data
+fetch_shopify_data
 ```
 
 This populates the PostgreSQL database.

@@ -31,6 +31,10 @@ def fetch_real_shopify_orders():
 
     orders_data = []
     for order in orders:
+        shipping_method = (
+            order.shipping_lines[0].title if order.shipping_lines else "No Shipping"
+        )
+
         for item in order.line_items:
             orders_data.append(
                 {
@@ -56,6 +60,7 @@ def fetch_real_shopify_orders():
                         if order.total_shipping_price_set
                         else 0
                     ),
+                    "shipping_method": shipping_method,
                     "gateway": getattr(order, "gateway", None),
                     "created_at": order.created_at,
                     "updated_at": order.updated_at,

@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 with DAG(
-    dag_id="daily_real_shopify_data",
+    dag_id="fetch_shopify_data",
     schedule_interval="@daily",
     start_date=datetime(2025, 3, 29),
     catchup=False,
@@ -13,7 +13,7 @@ with DAG(
 
     fetch_real_data = BashOperator(
         task_id="fetch_real_shopify_orders",
-        bash_command="python /opt/airflow/scripts/real_shopify_etl.py",
+        bash_command="python /opt/airflow/scripts/fetch_shopify_data.py",
     )
 
     update_customer_type = SQLExecuteQueryOperator(
