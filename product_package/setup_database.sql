@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS real_orders (
+    order_id BIGINT NOT NULL,
+    order_date TIMESTAMP NOT NULL,
+    product VARCHAR(255) NOT NULL,
+    customer_first_name VARCHAR(255),
+    customer_last_name VARCHAR(255),
+    customer_email VARCHAR(255),
+    financial_status VARCHAR(100),
+    fulfillment_status VARCHAR(100),
+    currency VARCHAR(10),
+    subtotal_price NUMERIC(10, 2),
+    total_price NUMERIC(10, 2),
+    total_tax NUMERIC(10, 2),
+    total_discounts NUMERIC(10, 2),
+    total_shipping NUMERIC(10, 2),
+    gateway VARCHAR(100),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    customer_type VARCHAR(50) CHECK (customer_type IN ('New', 'Returning')),
+    shipping_method VARCHAR(255),
+    PRIMARY KEY (order_id, product)
+);
