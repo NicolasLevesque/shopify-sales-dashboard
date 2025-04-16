@@ -20,17 +20,15 @@ Effortlessly analyze and forecast your Shopify store's performance.
 
 ## 🚀 Quick Setup Guide
 
-### ✅ Step 1: Clone the Repository
+### ✅ Step 1: Unzip the Package
 
-```bash
-git clone https://github.com/NicolasLevesque/shopify-sales-dashboard.git
-cd shopify-sales-dashboard/product_package
-```
+- Download the Shopify Sales Dashboard ZIP file.
+- Unzip it to your chosen location.
 
 ### ✅ Step 2: Configure Environment Variables
 
 - Rename `.env.example` to `.env`.
-- Clearly fill out your Shopify and PostgreSQL credentials.
+- Fill out your Shopify and PostgreSQL credentials.
 
 ### ✅ Step 3: Launch Docker Containers
 
