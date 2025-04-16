@@ -5,6 +5,7 @@ import plotly.express as px
 from dotenv import load_dotenv
 import os
 from scripts.predictive_analytics.sales_forecast import generate_forecast_plot
+import datetime
 
 # Load environment variables
 load_dotenv()
@@ -342,7 +343,10 @@ def main():
         )
 
     # Inform users of automatic updates
-    st.caption("Dashboard updates every 10 minutes automatically.")
+    last_updated = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    st.caption(
+        f"Dashboard last updated: {last_updated} | Updates every 10 minutes automatically."
+    )
 
 
 if __name__ == "__main__":

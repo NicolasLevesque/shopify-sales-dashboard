@@ -1,7 +1,7 @@
 # 🚀 Shopify Sales Dashboard – User Guide
 
 Welcome to your ready-to-use **Shopify Sales Dashboard**!  
-Easily analyze and forecast your Shopify store's performance.
+Effortlessly analyze and forecast your Shopify store's performance.
 
 ---
 
@@ -15,8 +15,6 @@ Easily analyze and forecast your Shopify store's performance.
 - **`docker-compose.yml`** – Docker Compose setup
 - **`.env.example`** – Template environment file
 - **`requirements.txt`** – Python dependencies
-- **`setup_database.sql`** – Database schema setup script
-- **`setup_database.bat`** – Quick-start database setup script
 
 ---
 
@@ -24,7 +22,7 @@ Easily analyze and forecast your Shopify store's performance.
 
 ### ✅ Step 1: Clone the Repository
 
-```
+```bash
 git clone https://github.com/NicolasLevesque/shopify-sales-dashboard.git
 cd shopify-sales-dashboard/product_package
 ```
@@ -32,62 +30,50 @@ cd shopify-sales-dashboard/product_package
 ### ✅ Step 2: Configure Environment Variables
 
 - Rename `.env.example` to `.env`.
-- Fill out the required Shopify and PostgreSQL credentials.
+- Clearly fill out your Shopify and PostgreSQL credentials.
 
-### ✅ Step 3: Launch Docker Containers (PostgreSQL, Airflow, Streamlit)
+### ✅ Step 3: Launch Docker Containers
 
-```
-docker-compose up --build
-```
-
-Your services are now running:
-
-- Airflow Dashboard: `http://localhost:8500`
-- Streamlit Dashboard: `http://localhost:8501`
--
-
-### ✅ Step 4: Set Up Database Schema
-
-- Double-click to run:
-
-```
-setup_database.bat
+```bash
+docker compose up --build
 ```
 
-This sets up the database schema automatically.
+Wait a few minutes until all services are fully initialized.
 
-### ✅ Step 5: Run ETL Pipeline with Airflow
+Your services will be accessible at:
 
-- Open Airflow: `http://localhost:8500`
-- Trigger the DAG:
+- **Airflow Dashboard**: [http://localhost:8500](http://localhost:8500)
+- **Streamlit Dashboard**: [http://localhost:8501](http://localhost:8501)
+- **pgAdmin (Database Viewer)**: [http://localhost:5050](http://localhost:5050)
 
-```
-fetch_shopify_data
-```
+_No additional database setup is required—this is handled automatically!_
 
-This populates the PostgreSQL database.
+### ✅ Step 4: Run ETL Pipeline with Airflow
+
+- Open [Airflow](http://localhost:8500).
+- Under "DAGs," locate `fetch_shopify_data`.
+- Click "Trigger DAG" to populate your dashboard with Shopify data.
 
 ---
 
 ## 📈 Using Your Dashboard
 
-- View live Shopify analytics
-- Interact with sales visualizations
-- See automated 14-day Prophet forecasts
-- Filter by dates and products easily
+- View Shopify analytics updated automatically every 10 minutes.
+- Interact with dynamic sales visualizations and forecasts.
+- Easily filter by dates and products.
 
 ---
 
 ## 🛠 Troubleshooting
 
 - **Docker issues?**  
-  Ensure Docker is installed and running.
+  Confirm Docker Desktop is running; restart Docker if necessary.
 
 - **Database connection errors?**  
-  Confirm your database credentials in the `.env` file.
+  Ensure PostgreSQL credentials exactly match your `.env` file.
 
-- **Empty dashboard or no data?**  
-  Check if Airflow DAG ran successfully.
+- **Empty dashboard or missing data?**  
+  Verify Airflow DAG execution in Airflow UI and check logs for details.
 
 Contact support at:  
 `levesquenicolas95@gmail.com`
@@ -96,14 +82,14 @@ Contact support at:
 
 ## 📄 License & Terms
 
-This project is licensed under the terms outlined in the [LICENSE.md](LICENSE.md) file.
+Licensed under the terms outlined in the [LICENSE.md](LICENSE.md) file.
 
 ---
 
 ## 🎯 Next Steps
 
-- **Deploy your dashboard publicly:** Heroku, AWS, Streamlit Cloud.
-- **Integrate additional Shopify metrics:** Inventory levels, customer lifetime value, or marketing insights.
-- **Automate further:** Schedule your DAG for automatic daily Shopify updates.
+- **Deploy publicly with ease:** Recommended via Streamlit Cloud or Heroku.
+- **Enhance your analytics:** Integrate inventory tracking, customer lifetime value, or marketing metrics.
+- **Automate further:** Configure your DAG in Airflow to run daily at midnight automatically.
 
-Enjoy your enhanced Shopify analytics experience!
+Enjoy powerful, hassle-free Shopify analytics!
