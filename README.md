@@ -27,6 +27,14 @@
 
 ---
 
+## Shopify Sales Dashboard — Available Now
+
+[👉 Get your copy instantly on Gumroad ($49)](https://nicolaslevesque.gumroad.com/l/urizjb)
+
+Includes complete installation instructions, Docker setup, Airflow ETL pipeline, and forecasting with Prophet.
+
+---
+
 ## Quick Navigation
 
 ### ⚡ Getting Started
