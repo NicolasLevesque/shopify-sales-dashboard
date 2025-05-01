@@ -1,4 +1,6 @@
-# Shopify Sales Dashboard
+# Shopify Sales Dashboard – End-to-End Data Engineering Pipeline
+
+Built a full-stack Shopify sales dashboard using **Streamlit** for interactive analysis. Generated synthetic sales data with injected anomalies to simulate real-world messiness. Automated an **ETL pipeline** using **Python** and **Airflow**, stored the cleaned data in **PostgreSQL**, and used **SQL** + **Power BI** to visualize key business metrics.
 
 ---
 

@@ -114,6 +114,7 @@ def main():
         labels={"order_date": "Order Date", "total_price": "Revenue ($)"},
         title="Daily Revenue Over Time",
     )
+    fig_daily.update_traces(line=dict(color="#7851A9"))
     fig_daily.update_xaxes(type="category")  # explicitly fixes date display issue
     fig_daily.update_layout(xaxis_title="Order Date", yaxis_title="Revenue ($)")
     st.plotly_chart(fig_daily, use_container_width=True)
